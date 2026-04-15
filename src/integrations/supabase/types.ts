@@ -14,16 +14,189 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      kanji: {
+        Row: {
+          character: string
+          created_at: string
+          id: string
+          kunyomi: string[] | null
+          level: number
+          meaning: string
+          meaning_alt: string[] | null
+          mnemonic: string
+          onyomi: string[] | null
+        }
+        Insert: {
+          character: string
+          created_at?: string
+          id?: string
+          kunyomi?: string[] | null
+          level?: number
+          meaning: string
+          meaning_alt?: string[] | null
+          mnemonic?: string
+          onyomi?: string[] | null
+        }
+        Update: {
+          character?: string
+          created_at?: string
+          id?: string
+          kunyomi?: string[] | null
+          level?: number
+          meaning?: string
+          meaning_alt?: string[] | null
+          mnemonic?: string
+          onyomi?: string[] | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          current_level: number
+          display_name: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          current_level?: number
+          display_name?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          current_level?: number
+          display_name?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_progress: {
+        Row: {
+          correct_count: number
+          created_at: string
+          ease_factor: number
+          id: string
+          incorrect_count: number
+          item_id: string
+          item_type: string
+          next_review_at: string
+          srs_interval: number
+          srs_stage: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          correct_count?: number
+          created_at?: string
+          ease_factor?: number
+          id?: string
+          incorrect_count?: number
+          item_id: string
+          item_type: string
+          next_review_at?: string
+          srs_interval?: number
+          srs_stage?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          correct_count?: number
+          created_at?: string
+          ease_factor?: number
+          id?: string
+          incorrect_count?: number
+          item_id?: string
+          item_type?: string
+          next_review_at?: string
+          srs_interval?: number
+          srs_stage?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      vocabulary: {
+        Row: {
+          created_at: string
+          example_meaning: string | null
+          example_sentence: string | null
+          id: string
+          kanji_ids: string[] | null
+          level: number
+          meaning: string
+          meaning_alt: string[] | null
+          mnemonic: string
+          reading: string
+          word: string
+        }
+        Insert: {
+          created_at?: string
+          example_meaning?: string | null
+          example_sentence?: string | null
+          id?: string
+          kanji_ids?: string[] | null
+          level?: number
+          meaning: string
+          meaning_alt?: string[] | null
+          mnemonic?: string
+          reading: string
+          word: string
+        }
+        Update: {
+          created_at?: string
+          example_meaning?: string | null
+          example_sentence?: string | null
+          id?: string
+          kanji_ids?: string[] | null
+          level?: number
+          meaning?: string
+          meaning_alt?: string[] | null
+          mnemonic?: string
+          reading?: string
+          word?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +323,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
